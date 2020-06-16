@@ -1,0 +1,1 @@
+This is the find_hat project from the Codecademy JavaScript course 
