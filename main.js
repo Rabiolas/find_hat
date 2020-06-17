@@ -20,7 +20,7 @@ class Field {
         }
     }
 
-    //checks for valid moves i.e. in border. if not log loss message, if yes returns true
+    //checks for valid moves i.e. within the field. if not log loss message, if yes returns true
     validMove() {
         if (this.move === 'u' && this.currentPosition[0] === 0) {
             return false;
@@ -35,6 +35,7 @@ class Field {
         }
     }
     
+    //moves position based on user input (promptUser method). Uses validMove method to check for valid moves within the field 
     movePosition() {
         this.promptUser();
         if (this.move === 'd' && this.validMove()) {
@@ -53,14 +54,16 @@ class Field {
             return false;
         }
     }
-
+    
+    //prints field for user to visualize playing field
     print() {
         const arrToString = this.field.map(row => {
             return row.join('')
         }).join('\n');
         console.log(arrToString)
     }
-
+    
+    //displays game instructions for player and asks if player wants to play or not
     startInstructions() {
         const Instructions = '\nNavigate to the hat symbol "^" to win using they keys R(right), L(left), U(up) or D(down).\nAvoid falling down to hole or moving out of the playing field.\nYour position is marked by the "*".'
         console.log(Instructions)
@@ -72,7 +75,8 @@ class Field {
             return false;
         } else { console.log('Type y or n')}
     }
-
+    
+    //static method to generate custom fields
     static generateField(height,width,percent) {
         const field = new Array(height).fill(0).map(element => new Array(width))
         for (let i=0; i < field.length; i++) {
@@ -95,7 +99,8 @@ class Field {
         field[0][0] = '*';
         return field;
     }
-
+    
+    //inititates the game
     playGame() {
         this.print();
         if (this.startInstructions() === false) {
